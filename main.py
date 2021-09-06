@@ -4,6 +4,7 @@
 Created on Sat Aug 31 20:14:04 2019
 
 @author: Kshitij Gupta <kshitijgm@gmail.com>
+@co-author: Maitreya Patni <maitreyapatni30@gmail.com>
 """
 
 from bs4 import BeautifulSoup
@@ -13,21 +14,18 @@ import time
 import subprocess
 import sys
 
+def send_msg(msg):
 
-def check_app(name):
-    ret = which(name) is not None
-    if not ret:
-        print('[*] command not found: {}'.format(name))
-    return ret
+   bot_token = ''
+   bot_chatID = ''
+   send_text = 'https://api.telegram.org/bot' + bot_token + '/sendMessage?chat_id=' + bot_chatID + '&parse_mode=Markdown&text=' + msg
+
+   response = requests.get(send_text)
+
+   return response.json()
 
 
 def main():
-    if not check_app('nyancat'):
-        print('Please install \'nyancat\'! Exiting.')
-        sys.exit()
-    term = input('Enter your terminal cmd (Eg. deepin-terminal, konsole): ')
-    if not check_app(term):
-        sys.exit()
 
     url = 'https://android.googlesource.com/platform/manifest/+refs'
     matching = []
@@ -40,20 +38,19 @@ def main():
         for li in soup.findAll('li', {'class': 'RefList-item'}):
             tag = li.findChildren('a', recursive=False)[0]['href'].split('/')[-1]
             tag_list.append(tag)
-        matching = [s for s in tag_list if 'android-11' in s or 'android11' in s]
+        matching = [s for s in tag_list if 'android-12' in s or 'android12' in s]
         if len(matching) > 0:
-            print('[!] ANDROID 11 IS HERE!')
-            print('[!] Result: {}'.format(matching))
+            test = send_msg("[!] ANDROID 12 IS HERE! @dogbutpink" + '[!] Result: {}'.format(matching))
+            print(test)
         else:
-            print('[*] No Android 11 (yet) 😕')
-            print('[*] Sleep time! 😴')
-            time.sleep(10 * 60)  # Wait for 10 minutes
+            test = send_msg('[*] No Android 12 (yet) 😭')
+            print(test)
+            time.sleep(20 * 60)  # Wait for 10 minutes
     try:
         from subprocess import DEVNULL
     except ImportError:
         import os
         DEVNULL = open(os.devnull, 'wb')
-    subprocess.Popen([term, '-e', 'nyancat'], stdout=DEVNULL, stderr=subprocess.STDOUT)
 
 
 if __name__ == '__main__':
