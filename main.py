@@ -43,13 +43,13 @@ def main():
             test = send_msg("[!] ANDROID 12 IS HERE! @dogbutpink" + '[!] Result: {}'.format(matching))
             print(test)
         else:
-            if i==20:
-                test = send_msg("[!] It's been an hour, ~12 checks have been done at an interval of 5 minutes. Android 12 is not here yet.")
+            if i==6:
+                test = send_msg("[!] It's been an hour, ~6 checks have been done at an interval of 10 minutes. Android 12 is not here yet.")
                 print(test)
                 i=0
             i += 1
             print(i)
-            time.sleep(5 * 60)  # Wait for 5 minutes
+            time.sleep(10 * 60)  # Wait for 10 minutes
 
     try:
         from subprocess import DEVNULL
