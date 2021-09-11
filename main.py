@@ -44,7 +44,7 @@ def main():
             print(test)
         else:
             if i==6:
-                test = send_msg("[!] It's been an hour, ~6 checks have been done at an interval of 10 minutes. Android 12 is not here yet.")
+                test = send_msg("[!] It's been an hour, ~6 checks + sex with Syn have been done at an interval of 10 minutes. Android 12 is not here yet.")
                 print(test)
                 i=0
             i += 1
